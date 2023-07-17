@@ -5,21 +5,21 @@ if ("service-worker" in navigator) {
 if(sessionStorage.getItem("verif") === null){
 	sessionStorage.setItem("verif", "")
 }
- var socket = io.connect("https://3d-escape-multiplayer.the-paperpaper.repl.co");
+ var socket = io.connect("https://threed-escape-multiplayer.onrender.com");
 var starttime;
 var endtime;
 socket.on("url",()=> {
-	if(location.href === "https://3d-escape-multiplayer.the-paperpaper.repl.co/"){
+	if(location.href === "https://threed-escape-multiplayer.onrender.com"){
 		socket.emit("correctstart");
 	}
 });
-if(location.href === "https://3d-escape-multiplayer.the-paperpaper.repl.co/"){
+if(location.href === "https://threed-escape-multiplayer.onrender.com"){
 	var username = prompt("Choose an username.");
 		socket.emit("username", username);
 }
 		
 socket.on("gamestart", ()=> {
-	if(location.href === "https://3d-escape-multiplayer.the-paperpaper.repl.co/"){
+	if(location.href === "https://threed-escape-multiplayer.onrender.com"){
 	game = true;
 	starttime = Date.now();
 	console.log(starttime);
