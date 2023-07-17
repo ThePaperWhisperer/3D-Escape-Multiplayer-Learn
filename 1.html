@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="socket.io.js"></script>
+	<script src="app.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>3D Escape Room Level 1</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+	<audio src="Boom.mp3" id="boom"></audio>
+<style>
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		background: black;
+		overflow: hidden;
+	}
+	#model{
+		position: absolute;
+		height: 100px;
+		width: 100px;
+		transform: rotateY(90deg);
+	}
+	#mainDiv {
+		width: 500px;
+		height: 500px;
+		margin: 200px auto;
+		perspective: 800px;
+	}
+
+	#boxDiv {
+		width: 500px;
+		height: 500px;
+		border: solid 3pt black;
+		transform-style: preserve-3d;
+		transform: translateZ(6000px);
+		transform: translateZ(600px);
+	}
+
+	#boxDiv div {
+		width: 500px;
+		height: 500px;
+		position: absolute;
+	}
+
+	#front {
+		transform: translateZ(250px) rotateY(180deg);
+	}
+
+	#back {
+		transform: translateZ(-250px);
+	}
+
+	#left {
+		transform: rotateY(90deg) translateX(-250px);
+		transform-origin: left;
+	}
+
+	#right {
+		transform: rotateY(-90deg) translateX(250px);
+		transform-origin: right;
+	}
+
+	#top {
+		transform: rotateX(-90deg) translateY(-250px);
+		transform-origin: top;
+	}
+
+	#bottom {
+		transform: rotateX(90deg) translateY(250px);
+		transform-origin: bottom;
+	}
+
+	img {
+		width: 500px;
+		height: 500px;
+	}
+</style>
+
+<body onload="alert('Find the Pickaxe to move on to step 2. Escape before 1 minute is up. Use the arrow keys to change your angle of view.  Good luck...')">
+	<label for="speed" style= "z-index: 3; top: 25px; position: absolute; color: white; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font: Tahoma">Game Speed</label>
+	<input type="range" id="speed" min="1" max="100" style="z-index: 3; top: 50px; position: absolute;" onchange="speedchange();">
+	<div id="mainDiv">
+		<div id="boxDiv">
+			<div id="top"><img src="grass.jpg" /></div>
+			<div id="bottom"><img src="dirt.jpg"/></div>
+			<div id="front"><img src="grass.jpg" /></div>
+			<div id="back"><img src="grass.jpg" /></div>
+			<div id="left"><img src="grass.jpg" /></div>
+			<div id="right"><img src="grass.jpg" /></div>
+			<audio id="pick" src="pickaxe.mp3"></audio>
+			
+			<model-viewer src="deep_rock_galactic_pickaxe.glb" autorotate camera-controls id="model" onclick="step2()" draggable="true" style="height: 100px; width: 100px;"></model-viewer>
+			<script>
+				var speed = document.getElementById("speed").value;
+				speed = parseInt(speed);
+				var x = 0, y = 0, world = document.getElementById("boxDiv");
+				document.addEventListener('keydown', function (e) {
+					if (e.key == "ArrowUp") {
+						y += 1;
+					}
+					if (e.key == "ArrowDown") {
+						y -= 1;
+					}
+					if (e.key == "ArrowRight") {
+						x += 1;
+					}
+					if (e.key == "ArrowLeft") {
+						x -= 1;
+					}
+
+					world.style.transform = "translateZ(600px) rotatex(" + (y * (speed / 50)) + "deg) rotateY(" + (x * (speed / 50)) + "deg)";
+				});
+
+				function speedchange(e) {
+					speed = document.getElementById("speed").value;
+					speed = parseInt(speed);
+					if (e.key == "ArrowUp") {
+						y += 1;
+					}
+					if (e.key == "ArrowDown") {
+						y -= 1;
+					}
+					if (e.key == "ArrowRight") {
+						x += 1;
+					}
+					if (e.key == "ArrowLeft") {
+						x -= 1;
+					}
+				}
+				var noise = document.querySelector("#pick");
+				
+					setTimeout(function (){
+						alert("Game Over!");
+						let retry = confirm("Try again?");
+						if(retry == true){
+							location.reload();
+						}
+						else{
+							window.close();
+						}
+					}, 60000);
+				function step2(){
+					alert("Pickaxe Collected.");
+					alert("Good Job! Use the pickaxe to escape your dirt prison. Click anywhere on the walls to break them with the pickaxe...keep clicking to break the hard dirt. ");
+					let model = document.getElementById('model');
+					model.style.display = "none";					
+				var clicks = 0
+				document.addEventListener('click', function (){
+					clicks++;
+					noise.play();
+					
+					if(clicks === 20){
+						let explosion = document.getElementById('expl');
+						explosion.style.display = 'block';
+						let boom = document.getElementById('boom');
+						boom.play();
+						setTimeout(function(){
+							alert("Great Job! You Completed level 1!");
+							add1();
+							let next = confirm("Play Level 2?");
+							if(next == true){
+								window.location.href = "2.html";
+							}
+							else{
+								let again = confirm("Play again?");
+						if(again == true){
+							location.reload();
+						}
+						else{
+							alert("Bye");
+							window.close();
+						}
+						
+							
+							}
+							}, 2000);
+				}
+				});
+				}
+			</script>
+			<img src="explosion.png" id="expl" style="display: none">
+		</div>
+	</div>
+		
+</body>
+</html>

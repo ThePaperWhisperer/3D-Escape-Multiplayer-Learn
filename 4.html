@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="socket.io.js"></script>
+	<script src="app.js"></script>
+	<meta name="viewport" content="width=device-width">
+	<title>3D Escape Room Level 4</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+	<script type="module" src="https://unpkg.com/@google/model-viewer@0.5.1/dist/model-viewer-legacy.js"> </script>
+<style>
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		background: url(Sky.jpg);
+		overflow: hidden;
+	}
+
+	#mainDiv {
+		width: 500px;
+		height: 500px;
+		margin: 200px auto;
+		perspective: 800px;
+	}
+
+	#boxDiv {
+		width: 500px;
+		height: 500px;
+		border: solid 3pt black;
+		transform-style: preserve-3d;
+		transform: translateZ(600px);
+	}
+
+	#boxDiv div {
+		width: 500px;
+		height: 500px;
+		position: absolute;
+	}
+
+	#front {
+		transform: translateZ(250px) rotateY(180deg);
+	}
+
+	#back {
+		transform: translateZ(-250px);
+	}
+
+	#left {
+		transform: rotateY(90deg) translateX(-250px);
+		transform-origin: left;
+	}
+
+	#right {
+		transform: rotateY(-90deg) translateX(250px);
+		transform-origin: right;
+	}
+
+	#top {
+		transform: rotateX(-90deg) translateY(-250px);
+		transform-origin: top;
+	}
+
+	#bottom {
+		transform: rotateX(90deg) translateY(250px);
+		transform-origin: bottom;
+	}
+
+	#front, #back, #top, #bottom, #left, #right {
+		background-image: url(sky2.jpg);
+	}
+</style>
+
+<body
+	onload="alert('You are free falling. Find the Jetpack and click it to before it is too late. Fly away with the jetpack before 10 seconds is up, or you will go splat. Use the arrow keys to change the viewing angle. Good luck...')">
+	<label for="speed" style= "z-index: 3; top: 25px; position: absolute;">Game Speed</label>
+	<input type="range" id="speed" min="1" max="100" style="z-index: 3; top: 50px; position: absolute;" onchange="speedchange();">
+	<div id="mainDiv" draggable="true">
+		<div id="boxDiv">
+			<div id="top"></div>
+			<div id="bottom"></div>
+			<div id="front"></div>
+			<div id="back"></div>
+			<div id="left"><model-viewer id="jetpack" src="mu_jetpack.glb"></model-viewer></div>
+			<div id="right"></div>
+			
+			<script>
+				var speed = document.getElementById("speed").value;
+				speed = parseInt(speed);
+				var x = 0, y = 0, world = document.getElementById("boxDiv");
+				document.addEventListener('keydown', function (e) {
+					if (e.key == "ArrowUp") {
+						y += 1;
+					}
+					if (e.key == "ArrowDown") {
+						y -= 1;
+					}
+					if (e.key == "ArrowRight") {
+						x += 1;
+					}
+					if (e.key == "ArrowLeft") {
+						x -= 1;
+					}
+
+					world.style.transform = "translateZ(600px) rotatex(" + (y * (speed / 50)) + "deg) rotateY(" + (x * (speed / 50)) + "deg)";
+				});
+
+				function speedchange(e) {
+					speed = document.getElementById("speed").value;
+					speed = parseInt(speed);
+					if (e.key == "ArrowUp") {
+						y += 1;
+					}
+					if (e.key == "ArrowDown") {
+						y -= 1;
+					}
+					if (e.key == "ArrowRight") {
+						x += 1;
+					}
+					if (e.key == "ArrowLeft") {
+						x -= 1;
+					}
+				}
+				const timeout = setTimeout(countdown, 10000);
+				document.getElementById('jetpack').addEventListener('click', function () {
+					alert("Great job! Now press space to fly away to safety.");
+					document.addEventListener('keypress', function (e) {
+						if(e.keyCode == '32') {
+							clearTimeout(timeout);
+							e.preventDefault();
+							alert("Congrats! You have bested the elements! Enjoy!");
+							add4();
+							let c = confirm("Play secret level?");
+							if(c == true){
+								window.location.href = "5.html";
+							}
+							else{
+							window.close();
+							}
+						}
+					});
+				});
+				function countdown() {
+					{
+					alert("Game Over!");
+					let retry = confirm("Try again?");
+					if (retry == true) {
+						location.reload();
+					}
+					else {
+						window.close();
+					}
+				}
+				}
+				
+			</script>
+		</div>
+	</div>
+</body>
+
+</html>
