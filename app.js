@@ -5,21 +5,21 @@ if ("service-worker" in navigator) {
 if(sessionStorage.getItem("verif") === null){
 	sessionStorage.setItem("verif", "")
 }
- var socket = io.connect("https://threed-escape-multiplayer.onrender.com");
+ var socket = io.connect("https://threed-escape-multiplayer.onrender.com/");
 var starttime;
 var endtime;
 socket.on("url",()=> {
-	if(location.href === "https://threed-escape-multiplayer.onrender.com"){
+	if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
 		socket.emit("correctstart");
 	}
 });
-if(location.href === "https://threed-escape-multiplayer.onrender.com"){
+if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
 	var username = prompt("Choose an username.");
 		socket.emit("username", username);
 }
 		
 socket.on("gamestart", ()=> {
-	if(location.href === "https://threed-escape-multiplayer.onrender.com"){
+	if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
 	game = true;
 	starttime = Date.now();
 	console.log(starttime);
