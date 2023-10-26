@@ -1,8 +1,6 @@
 const db = window.indexedDB.open("users", 4);
 var list;
-db.onupgradeneeded = (req)=> {
-		 list = req.target.result.createObjectStore('users')
-}
+
 if ("service-worker" in navigator) {
   // register service worker
   navigator.serviceWorker.register("service-worker.js");
@@ -21,7 +19,11 @@ socket.on("url",()=> {
 if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
 	var username = prompt("Choose an username.");
 		socket.emit("username", username);
-	list.add({username: username});
+	db.onupgradeneeded = (req)=> {
+		 list = req.target.result.createObjectStore('users')
+			list.add({username: username});
+
+}
 }
 		
 socket.on("gamestart", ()=> {
