@@ -1,5 +1,7 @@
 const db = window.indexedDB.open("users", 4);
-		const list = db.createObjectStore('users', { keyPath: 'people' });
+db.onsuccess = ()=> {
+		const list = db.createObjectStore('users');
+}
 if ("service-worker" in navigator) {
   // register service worker
   navigator.serviceWorker.register("service-worker.js");
