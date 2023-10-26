@@ -19,8 +19,9 @@ socket.on("url",()=> {
 if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
 	var username = prompt("Choose an username.");
 		socket.emit("username", username);
-	db.onupgradeneeded = (req)=> {
-		 list = req.target.result.createObjectStore('users')
+	db.onupgradeneeded = ()=> {
+		 transaction = db.result.transaction("usernames", "readwrite");
+			 list = transaction.createObjectStore('usernames')
 			list.add({username: username});
 
 }
