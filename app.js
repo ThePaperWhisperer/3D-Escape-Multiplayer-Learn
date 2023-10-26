@@ -1,4 +1,4 @@
-const DBOpenRequest = window.indexedDB.open("users", 4);
+const db = window.indexedDB.open("users", 4);
 		const list = db.createObjectStore('users', { keyPath: 'people' });
 if ("service-worker" in navigator) {
   // register service worker
