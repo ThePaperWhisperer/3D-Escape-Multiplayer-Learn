@@ -16,6 +16,7 @@ socket.on("url",()=> {
 		socket.emit("correctstart");
 	}
 });
+db.onsuccess = ()=>{
 if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
 	var username = prompt("Choose an username.");
 		socket.emit("username", username);
@@ -24,7 +25,7 @@ if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
 			list.add({username: username});
 
 }
-		
+}
 socket.on("gamestart", ()=> {
 	if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
 	game = true;
