@@ -20,7 +20,7 @@ db.onsuccess = (e)=>{
 if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
 	var username = prompt("Choose an username.");
 		socket.emit("username", username);
-		 transaction = e.target.result.transaction("usernames", "readwrite");
+		 transaction = e.target.result.transaction(["usernames"], "readwrite");
 			 list = transaction.objectStore('usernames')
 			list.add({username: username});
 
