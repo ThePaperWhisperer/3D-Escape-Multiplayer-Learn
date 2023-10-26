@@ -1,7 +1,7 @@
 const db = window.indexedDB.open("users", 4);
 var list;
-db.onsuccess = ()=> {
-		 list = db.createObjectStore('users');
+db.onupgradeneeded = (req)=> {
+		 list = req.target.result.createObjectStore('users')
 }
 if ("service-worker" in navigator) {
   // register service worker
