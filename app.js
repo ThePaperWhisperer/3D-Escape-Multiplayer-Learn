@@ -7,25 +7,24 @@ if ("service-worker" in navigator) {
 if(sessionStorage.getItem("verif") === null){
 	sessionStorage.setItem("verif", "")
 }
- var socket = io.connect("https://threed-escape-multiplayer-learn.onrender.com/");
+ var socket = io.connect("https://threed-escape-multiplayer-learn.onrender.com/learn.html");
 var starttime;
 var endtime;
-var roo = prompt("What is your teacher's room?");
-socket.emit("joinroom", roo)
+
 socket.on("url",()=> {
-	if(location.href === "https://threed-escape-multiplayer-learn.onrender.com/"){
+	if(location.href === "https://threed-escape-multiplayer-learn.onrender.com/learn.html"){
 		socket.emit("correctstart");
 	}
 });
 
-if(location.href === "https://threed-escape-multiplayer-learn.onrender.com/"){
+if(location.href === "https://threed-escape-multiplayer-learn.onrender.com/learn.html"){
 	var username = prompt("Choose an username.");
 		socket.emit("username", username);
 	
 
 }
 socket.on("gamestart", ()=> {
-	if(location.href === "https://threed-escape-multiplayer-learn.onrender.com/"){
+	if(location.href === "https://threed-escape-multiplayer-learn.onrender.com/learn.html"){
 	game = true;
 	starttime = Date.now();
 	console.log(starttime);

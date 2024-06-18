@@ -13,6 +13,11 @@
 <meta name="theme-color" content="#000000" />
 	<link href="style.css" rel="stylesheet" type="text/css" />
 	<link rel="icon" href="elements.jpeg" />
+    <script src="socket.io.js"></script>
+    <script src="app.js"></script>
+    <script>
+
+    </script>
 </head>
 
 <body>
@@ -45,7 +50,9 @@
 
 	<script>
 
-
+const socket = io();
+var roo = prompt("What is your teacher's room?");
+socket.emit("joinroom", roo)
 
 		function randomLevel() {
 			var urlArray = [
