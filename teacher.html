@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host A Game</title>
+    <script src="socket.io.js"></script>
+</head>
+<body>
+    <script>
+        var people = 0;
+        const socket = io();
+        var room = prompt("Choose a room code...");
+        socket.emit("room", room);
+        socket.on("check", ()=> {
+            var check = confirm("Do yo want to start the game with " + people + " people?");
+            if(check){
+                socket.emit("ready");
+            }
+        })
+    </script>
+</body>
+</html>

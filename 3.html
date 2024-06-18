@@ -74,7 +74,7 @@
 	}
 </style>
 
-<body onload="alert('You are now in a Volcano. Find the Goomba and click them to kill them to move on to step 2. Escape before 1 minute is up, or you will burn. Use the arrow keys to move. Good luck...')">
+<body onload="alert('Welcome to the Literacy Room. You are now in a Volcano. Find the Goomba and click them to kill them to move on to step 2. Escape before 1 minute is up, or you will burn. Use the arrow keys to move. Good luck...')">
 	<label for="speed" style= "z-index: 3; top: 25px; position: absolute; color: white">Game Speed</label>
 	<input type="range" id="speed" min="1" max="100" style="z-index: 3; top: 50px; position: absolute;" onchange="speedchange();">
 	<div id="mainDiv">
@@ -151,27 +151,26 @@
 				document.addEventListener('click', function (){
 					clicks++;
 					if(clicks === 75){
-
-							alert("Great Job! You Completed level 3!");
-							add3();
-						let l4 = confirm("Play level 4?");
-						if(l4 == true){
-							location.href = "4.html";
-						}
-						else{
-						let again = confirm("Play again?");
-						if(again == true){
-							location.reload();
-						}
-						else{
-							alert("Bye");
-							window.close();
-						}
-						}
+						check();
 					}
 				});					
 				
-				
+				function check(){
+					var math = prompt("I end sentences and put pauses in speeches. I am currently in this popup. What punctuation am I? (spell me out)");
+						if(math.toLowerCase() === "period"){
+							setTimeout(function(){
+							alert("Great Job! You Completed level 3!");
+							add3();
+								window.location.href = "4.html";
+							
+						
+							
+							}, 2000);
+						}
+						else{
+							check()
+						}
+				}
 			</script>
 			<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 			<script type="module">

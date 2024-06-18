@@ -34,27 +34,18 @@
 
 		<a href="5.html" style="color: white;"><img src="icetext.jpg" height="50px" width="50px"></a>
 		<a href="6.html" style="color: white;"><img src="metal.png" height="50px" width="50px"></a>
-		<a href="author.html" style="color: white;"><img src="hydrangea.jpg" height="50px" width="50px"><img
-				src="hydrangea.jpg" height="50px" width="50px"></a>
-		<br>
-		<a href="extensions.html" style="color: white; font-size: 32pt;">Mods</a>
-		<br>
-		<a style="color: yellow;" href="https://3d-Escape-Room-mobile.the-paperpaper.repl.co">Mobile Version</a>
 		<br>
 		<a style="color: white;" onclick="randomLevel()">Random Level</a>
 		<br>
 		<a style="color: white;" onclick="randomLevel()"><img height="150px" width="200px" src="choose.jpg"></a>
 	</div>
-	<p style="color: white;">Disclaimer: This game may cause motion sickness. Play at your own risk.               
+	<p style="color: white;">
     
-The images used in this website are not mine. each image belongs to their respective owners. the use of these images is governed by their respective terms. The copying or selling of any of these images is not permitted.</p>
 
 
 	<script>
 
-	if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
+
 
 		function randomLevel() {
 			var urlArray = [
@@ -73,20 +64,7 @@ The images used in this website are not mine. each image belongs to their respec
 		var month = now.getMonth() + 1;
 		var day = now.getDate();
 		var today = month + "/" + day;
-		if (today === "2/14") {
-			alert("Happy Valentines Day!");
-			 var heart = confirm("Play Heart Level?");
-			if(heart == true){
-				window.location.href = "Valentines.html";
-			}
-		}
-		if (today === "12/21") {
-			alert("Happy Winter!");
-			 var wint = confirm("Play Winter Level?");
-			if(wint == true){
-				window.location.href = "Winter.html";
-			}
-		}
+		
 	</script>
 
 </body>

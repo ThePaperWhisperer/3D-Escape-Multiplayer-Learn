@@ -84,7 +84,7 @@
 	}
 </style>
 
-<body onload="alert('Find the Pickaxe to move on to step 2. Escape before 1 minute is up. Use the arrow keys to change your angle of view.  Good luck...')">
+<body onload="alert('Welcome to the Math Room. Find the Pickaxe to move on to step 2. Escape before 1 minute is up. Use the arrow keys to change your angle of view.  Good luck...')">
 	<label for="speed" style= "z-index: 3; top: 25px; position: absolute; color: white; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font: Tahoma">Game Speed</label>
 	<input type="range" id="speed" min="1" max="100" style="z-index: 3; top: 50px; position: absolute;" onchange="speedchange();">
 	<div id="mainDiv">
@@ -158,32 +158,27 @@
 					noise.play();
 					
 					if(clicks === 20){
-						let explosion = document.getElementById('expl');
-						explosion.style.display = 'block';
-						let boom = document.getElementById('boom');
-						boom.play();
-						setTimeout(function(){
-							alert("Great Job! You Completed level 1!");
-							add1();
-							let next = confirm("Play Level 2?");
-							if(next == true){
-								window.location.href = "2.html";
-							}
-							else{
-								let again = confirm("Play again?");
-						if(again == true){
-							location.reload();
-						}
-						else{
-							alert("Bye");
-							window.close();
-						}
+						alert("Answer the question to go to the next level...");
+						check();
 						
-							
-							}
-							}, 2000);
 				}
 				});
+				}
+				function check(){
+					var math = prompt("I am divisible by 7 and less than 10. What number am I?");
+						if(math === "7"){
+							setTimeout(function(){
+							alert("Great Job! You Completed level 1!");
+							add1();
+								window.location.href = "2.html";
+							
+						
+							
+							}, 2000);
+						}
+						else{
+							check()
+						}
 				}
 			</script>
 			<img src="explosion.png" id="expl" style="display: none">

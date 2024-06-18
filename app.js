@@ -1,4 +1,3 @@
-const db = window.indexedDB.open("users", 4);
 var list;
 
 if ("service-worker" in navigator) {
@@ -8,32 +7,29 @@ if ("service-worker" in navigator) {
 if(sessionStorage.getItem("verif") === null){
 	sessionStorage.setItem("verif", "")
 }
- var socket = io.connect("https://threed-escape-multiplayer.onrender.com/");
+ var socket = io.connect("https://threed-escape-multiplayer-learn.onrender.com/");
 var starttime;
 var endtime;
+var roo = prompt("What is your teacher's room?");
+socket.emit("joinroom", roo)
 socket.on("url",()=> {
-	if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
+	if(location.href === "https://threed-escape-multiplayer-learn.onrender.com/"){
 		socket.emit("correctstart");
 	}
 });
-db.onsuccess = (e)=>{
-if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
+
+if(location.href === "https://threed-escape-multiplayer-learn.onrender.com/"){
 	var username = prompt("Choose an username.");
 		socket.emit("username", username);
-	db.onupgradeneeded = () => {
-		list = e.target.result.createObjectStore("usernames");
-		 transaction = e.target.result.transaction("usernames", "readwrite");
-			list.add({username: username});
-	}
+	
 
 }
-}
 socket.on("gamestart", ()=> {
-	if(location.href === "https://threed-escape-multiplayer.onrender.com/"){
+	if(location.href === "https://threed-escape-multiplayer-learn.onrender.com/"){
 	game = true;
 	starttime = Date.now();
 	console.log(starttime);
-	alert("Beat all the levels the fastest to win. Game starting...");
+	alert("Beat all the levels the fastest to place. The first four levels have questions to answer in order to move to the next level. Game starting...");
 	}
 });
 
@@ -75,12 +71,22 @@ function add6(){
 }
 
 socket.on("youwon", ()=> {
-	alert("Congrats! You won. Have a nice day!");
-	window.close();
+	alert("Congrats! You got first. Have a nice day!");
+});
+socket.on("yousec", ()=> {
+	alert("Congrats! You got second. Have a nice day!");
+});
+socket.on("youthird", ()=> {
+	alert("Congrats! You got third. Have a nice day!");
 });
 socket.on("winner", user => {
-	alert(user + " won! Better luck next time. Have a nice day!");
-	window.close();
+	alert(user + " got first place! ");
+})
+socket.on("second", (user)=> {
+	alert(user + " got second place! ");
+})
+socket.on("third", (user)=> {
+	alert(user + " got third place!");
 })
 socket.on("person", username => {
 	sessionStorage.setItem("username", username);

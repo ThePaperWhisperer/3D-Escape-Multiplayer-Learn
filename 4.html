@@ -77,7 +77,7 @@
 </style>
 
 <body
-	onload="alert('You are free falling. Find the Jetpack and click it to before it is too late. Fly away with the jetpack before 10 seconds is up, or you will go splat. Use the arrow keys to change the viewing angle. Good luck...')">
+	onload="alert('Welcome to the History Room. You are free falling. Find the Jetpack and click it to before it is too late. Fly away with the jetpack before 30 seconds is up, or you will go splat. Use the arrow keys to change the viewing angle. Good luck...')">
 	<label for="speed" style= "z-index: 3; top: 25px; position: absolute;">Game Speed</label>
 	<input type="range" id="speed" min="1" max="100" style="z-index: 3; top: 50px; position: absolute;" onchange="speedchange();">
 	<div id="mainDiv" draggable="true">
@@ -126,25 +126,33 @@
 						x -= 1;
 					}
 				}
-				const timeout = setTimeout(countdown, 10000);
+				const timeout = setTimeout(countdown, 30000);
 				document.getElementById('jetpack').addEventListener('click', function () {
 					alert("Great job! Now press space to fly away to safety.");
 					document.addEventListener('keypress', function (e) {
 						if(e.keyCode == '32') {
 							clearTimeout(timeout);
 							e.preventDefault();
-							alert("Congrats! You have bested the elements! Enjoy!");
-							add4();
-							let c = confirm("Play secret level?");
-							if(c == true){
-								window.location.href = "5.html";
-							}
-							else{
-							window.close();
-							}
+							check();
 						}
 					});
 				});
+				function check(){
+					var math = prompt("I was the first president. What is my last name?");
+						if(math.toLowerCase().includes("washington")){
+							setTimeout(function(){
+							alert("Great Job! You Completed level 4!");
+							add4();
+								window.location.href = "5.html";
+							
+						
+							
+							}, 2000);
+						}
+						else{
+							check()
+						}
+				}
 				function countdown() {
 					{
 					alert("Game Over!");

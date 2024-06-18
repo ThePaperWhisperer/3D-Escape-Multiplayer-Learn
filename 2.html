@@ -81,7 +81,7 @@
 	}
 </style>
 
-<body onload="alert('You are now in the aquarium. Find the weak green part of the tank to move on to step 2. Escape before 1 minute is up, or your oxygen will run out. Use the arrow keys to move.  Good luck...')">
+<body onload="alert('Welcome to the Science Room. You are now in the aquarium. Find the weak green part of the tank to move on to step 2. Escape before 1 minute is up, or your oxygen will run out. Use the arrow keys to move.  Good luck...')">
 	<label for="speed" style= "z-index: 3; top: 25px; position: absolute; color: white">Game Speed</label>
 	<input type="range" id="speed" min="1" max="100" style="z-index: 3; top: 50px; position: absolute;" onchange="speedchange();">
 	<div id="mainDiv">
@@ -144,32 +144,26 @@ document.getElementById('crack').addEventListener('click', breakcrack);
 				document.addEventListener('click', function (){
 					clicks++;
 					if(clicks === 50){
-						let explosion = document.getElementById('expl');
-						explosion.style.display = 'block';
-						let boom = document.getElementById('boom');
-						boom.play();
-						setTimeout(function(){
-							alert("Great Job! You Completed level 2!");
-							add2();
-							let l3 = confirm("Play Level 3?")
-							if(l3 == true){
-								location.href = "3.html";
-							}
-							else{
-						let again = confirm("Play again?");
-						if(again == true){
-							location.reload();
-						}
-						else{
-							alert("Bye");
-							window.close();
-						}
-							}
-						
-						}, 2000);
+						check()
 					}
 					
 				});
+				function check(){
+					var math = prompt("I break down matter for the ecosystem. What part of the food chain am I?");
+						if(math.toLowerCase().includes("decomposer")){
+							setTimeout(function(){
+							alert("Great Job! You Completed level 2!");
+							add2();
+								window.location.href = "3.html";
+							
+						
+							
+							}, 2000);
+						}
+						else{
+							check()
+						}
+				}
 				function breakcrack(){
 						alert("Keep clicking the other walls to break the glass.");
 	document.getElementById('crack').removeEventListener('click', breakcrack);
