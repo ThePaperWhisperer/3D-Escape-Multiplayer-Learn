@@ -18,6 +18,8 @@ socket.on("url",()=> {
 });
 
 if(location.href === "https://threed-escape-multiplayer-learn.onrender.com/learn.html"){
+	var roo = prompt("What is your teacher's room?");
+socket.emit("joinroom", roo)
 	var username = prompt("Choose an username.");
 		socket.emit("username", username);
 	
