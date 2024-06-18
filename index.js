@@ -2,13 +2,13 @@ const express = require("express");
 const socketio = require("socket.io");
 const app = express();
 var http = require("http");
-var url = require("url");
-var fullurl = "";
 var place = 1;
 app.use(express.static(__dirname));
 var rooms = [];
-var server = http.createServer(app).listen(3000);
-var hosts = []
+var server = http.createServer(app).listen(3000, ()=> {
+	console.log("I am listening at 3000!")
+});
+var hosts = [];
 const io = socketio(server);
 io.on("connection", (socket) => {
 	socket.on("joinroom", (r)=> {

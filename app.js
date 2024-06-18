@@ -7,7 +7,7 @@ if ("service-worker" in navigator) {
 if(sessionStorage.getItem("verif") === null){
 	sessionStorage.setItem("verif", "")
 }
- var socket = io.connect("https://threed-escape-multiplayer-learn.onrender.com/learn.html");
+ var socket = io.connect("https://threed-escape-multiplayer-learn.onrender.com/");
 var starttime;
 var endtime;
 
