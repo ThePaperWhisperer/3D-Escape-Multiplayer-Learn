@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html style="background-color: black; text-align: center">
+<script src="socket.io.js"></script>
+		<script src="app.js"></script>
+<head>
+	
+	<link rel="manifest" href="manifest.json">
+	<meta charset="utf-8">
+	<link rel="apple-touch-icon" href="elements.png" />
+	<meta name="viewport" content="width=device-width">
+	<title>3D Escape Room</title>
+	<meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+<meta name="theme-color" content="#000000" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link rel="icon" href="elements.jpeg" />
+</head>
+
+<body>
+	<div id="play">
+		<a href="1.html" style="color: white;">Level 1</a>
+		<a href="2.html" style="color: white;">Level 2</a>
+		<a href="3.html" style="color: white;">Level 3</a>
+		<a href="4.html" style="color: white;">Level 4</a>
+		<br />
+		<a href="1.html" style="color: white;"><img src="Level1.png" height="50px" width="50px"></a>
+		<a href="2.html" style="color: white;"><img src="ocean.jpeg" height="50px" width="50px"></a>
+		<a href="3.html" style="color: white;"><img src="Level3.jpg" height="50px" width="50px"></a>
+		<a href="4.html" style="color: white;"><img src="Level4.png" height="50px" width="50px"></a>
+		<br />
+		<a href="5.html" style="color: white;">Level 5</a>
+		<a href="6.html" style="color: white;">Level 6</a>
+		<a href="author.html" style="color: white; font-size: 9pt;">About The Developer</a>
+		<br>
+
+		<a href="5.html" style="color: white;"><img src="icetext.jpg" height="50px" width="50px"></a>
+		<a href="6.html" style="color: white;"><img src="metal.png" height="50px" width="50px"></a>
+		<br>
+		<a style="color: white;" onclick="randomLevel()">Random Level</a>
+		<br>
+		<a style="color: white;" onclick="randomLevel()"><img height="150px" width="200px" src="choose.jpg"></a>
+	</div>
+	<p style="color: white;">
+    
+
+
+	<script>
+
+
+
+		function randomLevel() {
+			var urlArray = [
+				"1.html",
+				"2.html",
+				"3.html",
+				"4.html",
+				"5.html",
+				"6.html"
+			];
+			var randomNumber = Math.floor(Math.random() * urlArray.length);
+			var newUrl = urlArray[randomNumber];
+			window.location.href = newUrl;
+		}
+		var now = new Date();
+		var month = now.getMonth() + 1;
+		var day = now.getDate();
+		var today = month + "/" + day;
+		
+	</script>
+
+</body>
+
+</html>
